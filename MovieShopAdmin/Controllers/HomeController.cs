@@ -6,13 +6,14 @@ using System.Web.Mvc;
 using Entities;
 using MovieShopAdmin.Models.Home;
 using MovieShopBackend;
+using ServiceGateway;
 
 namespace MovieShopAdmin.Controllers
 {
     public class HomeController : Controller
     {
-        private IManager<Order> _OrdersManager = new ManagerFacade().GetOrderManager();
-        private IManager<Customer> _CustomersManager = new ManagerFacade().GetCustomerManager();
+        private IServiceGateway<Order> _OrdersManager = ServiceGatewayManager.GetService<Order>();
+        private IServiceGateway<Customer> _CustomersManager = ServiceGatewayManager.GetService<Customer>();
 
         public ActionResult Index()
         {

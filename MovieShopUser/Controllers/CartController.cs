@@ -8,13 +8,14 @@ using System.Web.SessionState;
 using Entities;
 using MovieShopBackend;
 using MovieShopUser.Models.Cart;
+using ServiceGateway;
 
 namespace MovieShopUser.Controllers
 {
     public class CartController : Controller
     {
         private ManagerFacade facade = new ManagerFacade();
-        private IManager<Movie> movieManager = new ManagerFacade().GetMovieManager();
+        private IServiceGateway<Movie> movieManager = ServiceGatewayManager.GetService<Movie>();
 
         // GET: Cart
         public ActionResult Index()

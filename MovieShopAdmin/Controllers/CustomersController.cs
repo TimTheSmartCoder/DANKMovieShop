@@ -11,13 +11,14 @@ using MovieShopBackend;
 using MovieShopBackend.Contexts;
 using AutoMapper;
 using Entities;
+using ServiceGateway;
 
 namespace MovieShopAdmin.Controllers
 {
     public class CustomersController : Controller
     {
-        private IManager<Customer> _manager = new ManagerFacade().GetCustomerManager();
-        private IManager<Address> _addressManager = new ManagerFacade().GetAddressManager();
+        private IServiceGateway<Customer> _manager = ServiceGatewayManager.GetService<Customer>();
+        private IServiceGateway<Address> _addressManager = ServiceGatewayManager.GetService<Address>();
         
         // GET: Customers
         public ActionResult Index()

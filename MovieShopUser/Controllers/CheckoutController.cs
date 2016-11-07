@@ -8,14 +8,15 @@ using Entities;
 using MovieShopBackend;
 using MovieShopUser.Models.Cart;
 using MovieShopUser.Models.Checkout;
+using ServiceGateway;
 
 namespace MovieShopUser.Controllers
 {
     public class CheckoutController : Controller
     {
-        private IManager<Customer> _customerManager = new ManagerFacade().GetCustomerManager();
-        private IManager<Address> _addressManager = new ManagerFacade().GetAddressManager();
-        private IManager<Order> _OrderManager = new ManagerFacade().GetOrderManager();
+        private IServiceGateway<Customer> _customerManager = ServiceGatewayManager.GetService<Customer>();
+        private IServiceGateway<Address> _addressManager = ServiceGatewayManager.GetService<Address>();
+        private IServiceGateway<Order> _OrderManager = ServiceGatewayManager.GetService<Order>();
 
         // GET: Checkout
         public ActionResult Index()

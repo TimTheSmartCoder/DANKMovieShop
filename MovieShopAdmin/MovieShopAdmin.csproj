@@ -275,6 +275,10 @@
       <Project>{69e9e668-cc4d-4f40-b570-2c8e2e1a39fe}</Project>
       <Name>MovieShopBackend</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ServiceGateway\ServiceGateway.csproj">
+      <Project>{7bd09930-3271-4ee3-b79b-7890ec555456}</Project>
+      <Name>ServiceGateway</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

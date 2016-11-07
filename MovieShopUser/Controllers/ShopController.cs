@@ -6,13 +6,14 @@ using System.Web.Mvc;
 using Entities;
 using MovieShopBackend;
 using MovieShopUser.Models;
+using ServiceGateway;
 
 namespace MovieShopUser.Controllers
 {
     public class ShopController : Controller
     {
-        private IManager<Movie> _movieManager = new ManagerFacade().GetMovieManager();
-        private IManager<Genre> _GenreManager = new ManagerFacade().GetGenreManager();
+        private IServiceGateway<Movie> _movieManager = ServiceGatewayManager.GetService<Movie>();
+        private IServiceGateway<Genre> _GenreManager = ServiceGatewayManager.GetService<Genre>();
 
         private List<Movie> movies = new List<Movie>();
         private List<Genre> genres = new List<Genre>();

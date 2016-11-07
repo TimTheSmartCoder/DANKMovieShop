@@ -11,13 +11,14 @@ using Entities;
 using MovieShopAdmin.Models.Genres;
 using MovieShopBackend;
 using MovieShopBackend.Contexts;
+using ServiceGateway;
 
 namespace MovieShopAdmin.Controllers
 {
     public class GenresController : Controller
     {
-       
-        private IManager<Genre> _manager = new ManagerFacade().GetGenreManager();
+
+        private IServiceGateway<Genre> _manager = ServiceGatewayManager.GetService<Genre>();
         
         // GET: Genres
         public ActionResult Index()

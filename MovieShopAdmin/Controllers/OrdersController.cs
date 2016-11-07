@@ -9,12 +9,13 @@ using System.Web.Mvc;
 using Entities;
 using MovieShopBackend;
 using MovieShopBackend.Contexts;
+using ServiceGateway;
 
 namespace MovieShopAdmin.Controllers
 {
     public class OrdersController : Controller
     {
-        private IManager<Order> _manager = new ManagerFacade().GetOrderManager();
+        private IServiceGateway<Order> _manager = ServiceGatewayManager.GetService<Order>();
 
         // GET: Orders
         public ActionResult Index()

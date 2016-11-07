@@ -1,0 +1,58 @@
+﻿@using System.Activities.Statements
+@using MovieShopBackend.Entities
+@model MovieShopUser.Models.GenreMovieViewModel
+
+@{
+    ViewBag.Title = "MovieShop";
+}
+
+<main class="container">
+
+    <section class="filmes" id="filmes">
+        <h2 style="color: white;">Movies: @Model.SelectedGenre.Name</h2>
+        <div class="panel panel-default">
+            <div class="panel-body" style="padding: 5px;">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: black; text-decoration: none">Genres <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("Index", "Shop")">All</a></li>
+                            @foreach (Genre genre in Model.Genres)
+                            {
+                                <li><a href="@Url.Action("Filtert", "Shop", new {id = genre.Id})">@genre.Name</a></li>
+                            }
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        @foreach (Movie movie in Model.Movies)
+            {
+            <div class="span">
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a class="link" href="@Url.Action("Details", "Shop", new {id = movie.Id})">
+                        <article class="card">
+                            <header class="title-header">
+                                <h2 style="color: black; text-decoration: none">@movie.Title</h2>
+                            </header>
+                            <div class="card-block" style="background-color: white; padding: 5px;">
+                                <div class="img-card">
+                                    <img src="@movie.ImageUrl" alt="Movie" style="max-width: 238px; height: 250px;" />
+                                </div>
+                                <hr />
+                                <p class="tagline card-text text-xs-center" style="color: black;">
+                                    Genre: @movie.Genre.Name<br />Year @movie.Year <br />Price @movie.Price
+                                </p>
+                                <a href="@movie.Trailer" class="btn btn-primary btn-block"><i class="fa fa-eye"></i> Watch Trailer</a>
+                                <a href="@Url.Action("Add", "Cart", new {prevUrl = "/Shop", id = movie.Id})" class="btn btn-primary btn-block"><i class="fa fa-eye"></i> Add to Cart</a>
+                            </div>
+                        </article>
+                    </a>
+                </div>
+            </div>
+
+        }
+    </section>
+
+</main>
+

@@ -1,0 +1,35 @@
+﻿@using System.Activities.Statements
+@using MovieShopBackend.Entities
+@model MovieShopBackend.Entities.Movie
+
+@{
+    ViewBag.Title = "MovieDetails";
+}
+
+<center>
+    
+
+    <main class="container">
+        <section class="filmes">
+            <div class="panel panel-primary" style="text-align: center; max-width: 450px">
+                <h2>@Model.Title</h2>
+            </div>
+
+            <div class="card-block" style="text-align:center">
+                <div class="img-card" style="text-align:center">
+                    <img src="@Model.ImageUrl" alt="Movie" style="max-width: 450px; height: 700px" />
+                </div>
+            </div>
+            <iframe width="450px" height="253px" src="@Model.Trailer" allowfullscreen></iframe>
+            <div class="panel panel-primary" style="text-align: center; max-width: 450px">
+                <p class="tagline card-text text-xs-center" style="text-align:center">Genre: @Model.Genre<br />Year: @Model.Year <br />Price: @Model.Price</p>
+            </div>
+            <a href="" class="btn btn-primary btn-block" style="max-width: 450px"><i class="fa fa-eye" style="text-align: center; "></i> Order Now </a>
+
+
+        </section>
+    </main>
+</center>
+
+
+

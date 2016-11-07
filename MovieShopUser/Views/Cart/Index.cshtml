@@ -1,0 +1,57 @@
+﻿
+@using MovieShopBackend.Entities
+@model MovieShopUser.Models.Cart.CartViewModel
+@{
+    ViewBag.Title = "Shopping Cart";
+}
+
+<table>
+    <tr>
+        <td>
+            <h2 style="color: white">Shopping Cart</h2>
+        </td>
+    </tr>
+</table>
+<table class="table">
+    @foreach (Movie movie in Model.Movies)
+    {
+        <tr  style="background-color: white">
+            <td style="width: 250px">
+                <div class="span">
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <a href="@Url.Action("Details", "Shop", new {id = movie.Id})">
+                            <article class="card">
+                                <div class="card-block">
+                                    <div class="img-card">
+                                        <img src="@movie.ImageUrl" alt="Movie" style="max-width: 250px; height: 250px; border: 1px solid black" />
+                                    </div>
+                                </div>
+                            </article>
+                        </a>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <header class="title-header">
+                    <h2>@movie.Title</h2>
+                </header>
+                <p class="tagline card-text text-xs-center">Genre: @movie.Genre.Name<br />Year @movie.Year <br />Price @movie.Price</p>
+                <a href="@movie.Trailer" class="btn btn-primary btn-block" style="margin-top: 100px"><i class="fa fa-eye"></i> Watch Now</a>
+            </td>
+            <td>
+                <a href="@Url.Action("Delete", "Cart", new {id = movie.Id})" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+            </td>
+        </tr>
+        <tr style="height: 10px"></tr>
+    }
+    
+
+    @if (Model.Movies.Any())
+    {
+        <tr><td colspan="3" style="background-color: white;"><span style="padding-top: 20px; font-weight: bold;">Total: @Model.Total</span> <a href="@Url.Action("Index", "Checkout")" style="float: right;" class="btn btn-primary">Checkout</a></td></tr>
+    }
+    else
+    {
+        <tr><td style="background-color: white;" colspan="3"> Your shopping cart is empty!</td></tr>
+    }
+</table>

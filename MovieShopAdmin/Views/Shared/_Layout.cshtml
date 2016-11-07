@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+
+@*<div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+            </div>
+        </div>
+    </div>*@
+    
+
+<div id="wrapper">
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <!-- Top navigation bar begin. -->
+        <div class="navbar-header">
+            <div class="navbar-brand">DANK Movie Shop Admin</div>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle Menu</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <!-- Top navigation bar end. -->
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li>
+                        <div>
+                            <a href="~/" style="background-color: transparent;"><img src="@Url.Content("~/Content/Images/logo.png")" width="200px" style="margin-left: 25px;" /></a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#">Movies <span class="glyphicon glyphicon-chevron-down" style="float: right; width: 10px;"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>@Html.ActionLink("List of movies", "Index", "Movies")</li>
+                            <li>@Html.ActionLink("Create", "Create", "Movies")</li>
+                        </ul>
+                    </li>
+                    <li>
+                        @Html.ActionLink("Orders", "Index", "Orders")
+                    </li>
+                    <li>
+                        <a href="#">Customers <span class="glyphicon glyphicon-chevron-down" style="float: right; width: 10px;"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>@Html.ActionLink("List of customers", "Index", "Customers")</li>
+                            <li>@Html.ActionLink("Create", "Create", "Customers")</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Genres <span class="glyphicon glyphicon-chevron-down" style="float: right; width: 10px;"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>@Html.ActionLink("List of genres", "Index", "Genres")</li>
+                            <li>@Html.ActionLink("Create", "Create", "Genres")</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Page content begin. -->
+    <div id="page-wrapper" style="padding-top: 10px;">
+        @RenderBody()
+    </div>
+    <!-- Page Content end. -->
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
+
+<script type="text/javascript" src="~/Scripts/metisMenu.js"></script>
+
+</body>
+</html>

@@ -4,8 +4,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Entities;
 using MovieShopBackend;
-using MovieShopBackend.Entities;
 using MovieShopUser.Models.Cart;
 using MovieShopUser.Models.Checkout;
 

@@ -7,8 +7,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entities;
 using MovieShopBackend.Contexts;
-using MovieShopBackend.Entities;
 using MovieShopBackend.Exceptions;
 
 namespace MovieShopBackend.Managers

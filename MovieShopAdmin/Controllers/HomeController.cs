@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Entities;
 using MovieShopAdmin.Models.Home;
 using MovieShopBackend;
-using MovieShopBackend.Entities;
 
 namespace MovieShopAdmin.Controllers
 {

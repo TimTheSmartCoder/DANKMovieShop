@@ -7,10 +7,10 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
+using Entities;
 using MovieShopAdmin.Models.Movies;
 using MovieShopBackend;
 using MovieShopBackend.Contexts;
-using MovieShopBackend.Entities;
 
 namespace MovieShopAdmin.Controllers
 {

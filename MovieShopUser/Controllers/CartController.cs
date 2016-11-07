@@ -5,9 +5,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.SessionState;
+using Entities;
 using MovieShopBackend;
-using MovieShopBackend.Entities;
-
 using MovieShopUser.Models.Cart;
 
 namespace MovieShopUser.Controllers

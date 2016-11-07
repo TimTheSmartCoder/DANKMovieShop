@@ -267,6 +267,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Entities\Entities.csproj">
+      <Project>{298560A8-D1B6-4B01-BF5D-21B8CDD6D5AB}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MovieShopBackend\MovieShopBackend.csproj">
       <Project>{69e9e668-cc4d-4f40-b570-2c8e2e1a39fe}</Project>
       <Name>MovieShopBackend</Name>

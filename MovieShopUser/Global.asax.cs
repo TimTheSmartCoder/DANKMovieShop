@@ -22,16 +22,16 @@ namespace MovieShopUser
             {
                 config
                     .CreateMap
-                    <MovieShopBackend.Entities.Customer, MovieShopUser.Models.Checkout.CheckoutProcessViewModel>();
+                    <Entities.Customer, MovieShopUser.Models.Checkout.CheckoutProcessViewModel>();
                 config
                     .CreateMap
-                    <MovieShopBackend.Entities.Address, MovieShopUser.Models.Checkout.CheckoutProcessViewModel>();
+                    <Entities.Address, MovieShopUser.Models.Checkout.CheckoutProcessViewModel>();
                 config
                     .CreateMap
-                    <MovieShopUser.Models.Checkout.CheckoutProcessViewModel, MovieShopBackend.Entities.Customer>();
+                    <MovieShopUser.Models.Checkout.CheckoutProcessViewModel, Entities.Customer>();
                 config
                     .CreateMap
-                    <MovieShopUser.Models.Checkout.CheckoutProcessViewModel, MovieShopBackend.Entities.Address>();
+                    <MovieShopUser.Models.Checkout.CheckoutProcessViewModel, Entities.Address>();
             });
             //AutoMapper configuration end.
         }

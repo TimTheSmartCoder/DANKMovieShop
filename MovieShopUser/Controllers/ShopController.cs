@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Entities;
 using MovieShopBackend;
-using MovieShopBackend.Entities;
 using MovieShopUser.Models;
 
 namespace MovieShopUser.Controllers

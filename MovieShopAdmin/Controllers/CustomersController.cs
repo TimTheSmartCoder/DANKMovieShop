@@ -9,8 +9,8 @@ using System.Web.Mvc;
 using MovieShopAdmin.Models.Customers;
 using MovieShopBackend;
 using MovieShopBackend.Contexts;
-using MovieShopBackend.Entities;
 using AutoMapper;
+using Entities;
 
 namespace MovieShopAdmin.Controllers
 {

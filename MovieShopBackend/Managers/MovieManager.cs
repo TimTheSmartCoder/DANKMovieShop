@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using MovieShopBackend.Contexts;
-using MovieShopBackend.Entities;
 using System.Data.Entity;
+using Entities;
 
 namespace MovieShopBackend.Managers
 {

@@ -12,8 +12,8 @@ namespace MovieShopAdmin.Controllers
 {
     public class HomeController : Controller
     {
-        private IServiceGateway<Order> _OrdersManager = ServiceGatewayManager.GetService<Order>();
-        private IServiceGateway<Customer> _CustomersManager = ServiceGatewayManager.GetService<Customer>();
+        private IServiceGateway<Order> _OrdersManager = ServiceGatewayFactory.GetService<Order>();
+        private IServiceGateway<Customer> _CustomersManager = ServiceGatewayFactory.GetService<Customer>();
 
         public ActionResult Index()
         {

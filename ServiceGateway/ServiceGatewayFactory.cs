@@ -12,7 +12,7 @@ using ServiceGateway.ServiceGateways;
 
 namespace ServiceGateway
 {
-    public class ServiceGatewayManager
+    public class ServiceGatewayFactory
     {
         /// <summary>
         /// Get the Service Gateway for the given type.

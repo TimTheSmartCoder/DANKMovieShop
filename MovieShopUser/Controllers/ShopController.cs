@@ -12,8 +12,8 @@ namespace MovieShopUser.Controllers
 {
     public class ShopController : Controller
     {
-        private IServiceGateway<Movie> _movieManager = ServiceGatewayManager.GetService<Movie>();
-        private IServiceGateway<Genre> _GenreManager = ServiceGatewayManager.GetService<Genre>();
+        private IServiceGateway<Movie> _movieManager = ServiceGatewayFactory.GetService<Movie>();
+        private IServiceGateway<Genre> _GenreManager = ServiceGatewayFactory.GetService<Genre>();
 
         private List<Movie> movies = new List<Movie>();
         private List<Genre> genres = new List<Genre>();

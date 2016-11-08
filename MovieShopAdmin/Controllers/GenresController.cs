@@ -18,7 +18,7 @@ namespace MovieShopAdmin.Controllers
     public class GenresController : Controller
     {
 
-        private IServiceGateway<Genre> _manager = ServiceGatewayManager.GetService<Genre>();
+        private IServiceGateway<Genre> _manager = ServiceGatewayFactory.GetService<Genre>();
         
         // GET: Genres
         public ActionResult Index()

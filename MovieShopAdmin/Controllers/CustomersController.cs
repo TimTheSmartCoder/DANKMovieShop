@@ -17,8 +17,8 @@ namespace MovieShopAdmin.Controllers
 {
     public class CustomersController : Controller
     {
-        private IServiceGateway<Customer> _manager = ServiceGatewayManager.GetService<Customer>();
-        private IServiceGateway<Address> _addressManager = ServiceGatewayManager.GetService<Address>();
+        private IServiceGateway<Customer> _manager = ServiceGatewayFactory.GetService<Customer>();
+        private IServiceGateway<Address> _addressManager = ServiceGatewayFactory.GetService<Address>();
         
         // GET: Customers
         public ActionResult Index()

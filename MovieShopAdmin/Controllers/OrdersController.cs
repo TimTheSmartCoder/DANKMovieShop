@@ -15,7 +15,7 @@ namespace MovieShopAdmin.Controllers
 {
     public class OrdersController : Controller
     {
-        private IServiceGateway<Order> _manager = ServiceGatewayManager.GetService<Order>();
+        private IServiceGateway<Order> _manager = ServiceGatewayFactory.GetService<Order>();
 
         // GET: Orders
         public ActionResult Index()

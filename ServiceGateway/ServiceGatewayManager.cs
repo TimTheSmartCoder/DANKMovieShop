@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Entities;
@@ -13,22 +15,18 @@ namespace ServiceGateway
     {
         public static IServiceGateway<T> GetService<T>() where T : AbstractEntity
         {
-            string name = typeof(T).Name;
+            //Namespace to the Service Gateway classes.
+            string @namespace = "ServiceGateway.ServiceGateways";
 
-            if (name.Equals(typeof(Address).Name))
-                return (IServiceGateway<T>) new AddressServiceGateway();
+            //Queries all of the Service Gateways classes except the Abstract.
+            IEnumerable<Type> classes = from t in Assembly.GetExecutingAssembly().GetTypes()
+                where t.IsClass && t.Namespace == @namespace && !t.IsAbstract
+                select t;
 
-            if (name.Equals(typeof(Customer).Name))
-                return (IServiceGateway<T>) new CustomerServiceGateway();
+            foreach (Type @class in classes)
+                if (@class != null && @class.BaseType.GetGenericArguments()[0].Name == typeof(T).Name)
+                    return (IServiceGateway<T>) Activator.CreateInstance(@class);
 
-            if (name.Equals(typeof(Genre).Name))
-                return (IServiceGateway<T>) new GenreServiceGateway();
-
-            if (name.Equals(typeof(Movie).Name))
-                return (IServiceGateway<T>) new MovieServiceGateway();
-
-            if (name.Equals(typeof(Order).Name))
-                return (IServiceGateway<T>) new OrderServiceGateway();
 
             throw new ServiceGatewayException($"Failed to find a gateway for {typeof(T).Name}");
         }

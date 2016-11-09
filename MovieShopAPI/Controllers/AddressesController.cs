@@ -42,6 +42,7 @@ namespace MovieShopAPI.Controllers
         // PUT: api/Addresses/5
         [ResponseType(typeof(void))]
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult PutAddress(int id, Address address)
         {
             if (!ModelState.IsValid)
@@ -63,6 +64,7 @@ namespace MovieShopAPI.Controllers
         // POST: api/Addresses
         [ResponseType(typeof(Address))]
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult PostAddress(Address address)
         {
             if (!ModelState.IsValid)
@@ -78,6 +80,7 @@ namespace MovieShopAPI.Controllers
         // DELETE: api/Addresses/5
         [ResponseType(typeof(Address))]
         [HttpDelete]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult DeleteAddress(int id)
         {
             Address address = _manager.ReadOne(id);

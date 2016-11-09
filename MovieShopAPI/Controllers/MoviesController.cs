@@ -17,7 +17,7 @@ namespace MovieShopAPI.Controllers
     public class MoviesController : ApiController
     {
         private IManager<Movie> _manager = new ManagerFacade().GetMovieManager();
-        
+
 
         // GET: api/Movies
         public IEnumerable<Movie> GetMovies()

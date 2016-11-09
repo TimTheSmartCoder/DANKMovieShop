@@ -14,9 +14,9 @@ namespace MovieShopUser.Controllers
 {
     public class CheckoutController : Controller
     {
-        private IServiceGateway<Customer> _customerManager = ServiceGatewayManager.GetService<Customer>();
-        private IServiceGateway<Address> _addressManager = ServiceGatewayManager.GetService<Address>();
-        private IServiceGateway<Order> _OrderManager = ServiceGatewayManager.GetService<Order>();
+        private IServiceGateway<Customer> _customerManager = ServiceGatewayFactory.GetService<Customer>();
+        private IServiceGateway<Address> _addressManager = ServiceGatewayFactory.GetService<Address>();
+        private IServiceGateway<Order> _OrderManager = ServiceGatewayFactory.GetService<Order>();
 
         // GET: Checkout
         public ActionResult Index()

@@ -48,7 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ServiceGatewayManager.cs" />
+    <Compile Include="ServiceGatewayFactory.cs" />
     <Compile Include="ServiceGateways\AbstractServiceGateway.cs" />
     <Compile Include="Exceptions\ServiceGatewayException.cs" />
     <Compile Include="IServiceGateway.cs" />

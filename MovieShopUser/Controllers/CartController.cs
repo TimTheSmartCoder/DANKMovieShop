@@ -15,7 +15,7 @@ namespace MovieShopUser.Controllers
     public class CartController : Controller
     {
         private ManagerFacade facade = new ManagerFacade();
-        private IServiceGateway<Movie> movieManager = ServiceGatewayManager.GetService<Movie>();
+        private IServiceGateway<Movie> movieManager = ServiceGatewayFactory.GetService<Movie>();
 
         // GET: Cart
         public ActionResult Index()

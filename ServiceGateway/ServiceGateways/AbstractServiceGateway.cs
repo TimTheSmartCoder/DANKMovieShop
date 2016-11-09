@@ -1,101 +1,79 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
 using Entities;
 using ServiceGateway.Exceptions;
 
-namespace ServiceGateway
+namespace ServiceGateway.ServiceGateways
 {
     internal abstract class AbstractServiceGateway<T> : IServiceGateway<T> where T : AbstractEntity
     {
+        protected readonly HttpClient Client;
+
+        protected AbstractServiceGateway()
+        {
+            //Create client.
+            this.Client = new HttpClient();
+            this.Client.BaseAddress = this.GetHost();
+            this.Client.DefaultRequestHeaders.Accept.Clear();
+            this.Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        }
+
         public T Create(T entity)
         {
-            using (HttpClient client = new HttpClient())
-            {
-                //Create client.
-                client.BaseAddress = this.GetHost();
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response = this.Client.PostAsJsonAsync(GetRestApiUri().AbsolutePath, entity).Result;
 
-                HttpResponseMessage response = client.PostAsJsonAsync(this.GetRestApiUri().AbsolutePath, entity).Result;
+            if (response.IsSuccessStatusCode)
+                return response.Content.ReadAsAsync<T>().Result;
 
-                if (response.IsSuccessStatusCode)
-                    return response.Content.ReadAsAsync<T>().Result;
-                
-                throw new ServiceGatewayException($"Failed to create {entity.GetType().Name} with {this.GetRestApiUri().AbsoluteUri}");
-            }
+            throw new ServiceGatewayException(
+                $"Failed to create {entity.GetType().Name} with {GetRestApiUri().AbsoluteUri}");
         }
 
         public List<T> ReadAll()
         {
-            using (HttpClient client = new HttpClient())
-            {
-                client.BaseAddress = this.GetHost();
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response = this.Client.GetAsync(GetRestApiUri().AbsolutePath).Result;
 
-                HttpResponseMessage response = client.GetAsync(this.GetRestApiUri().AbsolutePath).Result;
+            if (response.IsSuccessStatusCode)
+                return response.Content.ReadAsAsync<List<T>>().Result;
 
-                if (response.IsSuccessStatusCode)
-                    return response.Content.ReadAsAsync<List<T>>().Result;
-
-                throw new ServiceGatewayException($"Failed to get all the entites of {typeof(T).Name} with {this.GetRestApiUri().AbsoluteUri}");
-            }
+            throw new ServiceGatewayException(
+                $"Failed to get all the entites of {typeof(T).Name} with {GetRestApiUri().AbsoluteUri}");
         }
 
         public T ReadOne(int id)
         {
-            using (HttpClient client = new HttpClient())
-            {
-                client.BaseAddress = this.GetHost();
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response = this.Client.GetAsync($"{GetRestApiUri().AbsolutePath}/{id}").Result;
 
-                HttpResponseMessage response = client.GetAsync($"{this.GetRestApiUri().AbsolutePath}/{id}").Result;
+            if (response.IsSuccessStatusCode)
+                return response.Content.ReadAsAsync<T>().Result;
 
-                if (response.IsSuccessStatusCode)
-                    return response.Content.ReadAsAsync<T>().Result;
-
-                throw new ServiceGatewayException($"Failed to get the entity {typeof(T).Name} with {this.GetRestApiUri().AbsoluteUri}");
-            }
+            throw new ServiceGatewayException(
+                $"Failed to get the entity {typeof(T).Name} with {GetRestApiUri().AbsoluteUri}");
         }
 
         public T Update(T entity)
         {
-            using (HttpClient client = new HttpClient())
-            {
-                client.BaseAddress = this.GetHost();
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response =
+                this.Client.PostAsJsonAsync($"{GetRestApiUri().AbsolutePath}/{entity.Id}", entity).Result;
 
-                HttpResponseMessage response = client.PostAsJsonAsync($"{this.GetRestApiUri().AbsolutePath}/{entity.Id}", entity).Result;
+            if (response.IsSuccessStatusCode)
+                return response.Content.ReadAsAsync<T>().Result;
 
-                if (response.IsSuccessStatusCode)
-                    return response.Content.ReadAsAsync<T>().Result;
-
-                throw new ServiceGatewayException($"Failed to update the entity {typeof(T).Name} with {this.GetRestApiUri().AbsoluteUri}");
-            }
+            throw new ServiceGatewayException(
+                $"Failed to update the entity {typeof(T).Name} with {GetRestApiUri().AbsoluteUri}");
         }
 
         public bool Delete(int id)
         {
-            using (HttpClient client = new HttpClient())
-            {
-                client.BaseAddress = this.GetHost();
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response = this.Client.DeleteAsync($"{GetRestApiUri().AbsolutePath}/{id}").Result;
 
-                HttpResponseMessage response = client.DeleteAsync($"{this.GetRestApiUri().AbsolutePath}/{id}").Result;
+            if (response.IsSuccessStatusCode)
+                return true;
 
-                if (response.IsSuccessStatusCode)
-                    return true;
-
-                throw new ServiceGatewayException($"Failed to delete the entity {typeof(T).Name} with {this.GetRestApiUri().AbsoluteUri}");
-            }
+            throw new ServiceGatewayException(
+                $"Failed to delete the entity {typeof(T).Name} with {GetRestApiUri().AbsoluteUri}");
         }
 
         protected abstract Uri GetRestApiUri();

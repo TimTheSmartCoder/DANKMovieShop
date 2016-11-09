@@ -40,6 +40,7 @@ namespace MovieShopAPI.Controllers
 
         // PUT: api/Genres/5
         [ResponseType(typeof(void))]
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         public IHttpActionResult PutGenre(int id, Genre genre)
         {
@@ -60,6 +61,7 @@ namespace MovieShopAPI.Controllers
 
         // POST: api/Genres
         [ResponseType(typeof(Genre))]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IHttpActionResult PostGenre(Genre genre)
         {
@@ -75,6 +77,7 @@ namespace MovieShopAPI.Controllers
 
         // DELETE: api/Genres/5
         [ResponseType(typeof(Genre))]
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         public IHttpActionResult DeleteGenre(int id)
         {

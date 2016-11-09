@@ -65,7 +65,7 @@ namespace ServiceGateway.ServiceGateways
         public T Update(T entity)
         {
             HttpResponseMessage response =
-                this.Client.PostAsJsonAsync($"{GetRestApiUri().AbsolutePath}/{entity.Id}", entity).Result;
+                this.Client.PutAsJsonAsync($"{GetRestApiUri().AbsolutePath}/{entity.Id}", entity).Result;
 
             if (response.IsSuccessStatusCode)
                 return response.Content.ReadAsAsync<T>().Result;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Entities;
+using ServiceGateway.Authentication;
 using ServiceGateway.Exceptions;
 
 namespace ServiceGateway.ServiceGateways
@@ -11,13 +12,21 @@ namespace ServiceGateway.ServiceGateways
     {
         protected readonly HttpClient Client;
 
-        protected AbstractServiceGateway()
+        protected AbstractServiceGateway() : this(null)
+        {
+            //Nothing here to see.
+        }
+
+        protected AbstractServiceGateway(IAuthentication authentication)
         {
             //Create client.
             this.Client = new HttpClient();
             this.Client.BaseAddress = this.GetHost();
             this.Client.DefaultRequestHeaders.Accept.Clear();
             this.Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            //Login if authentication is required.
+            authentication?.Login(this.Client);
         }
 
         public T Create(T entity)

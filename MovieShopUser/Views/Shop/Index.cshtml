@@ -1,6 +1,6 @@
 ﻿@using System.Activities.Statements
 @using Entities
-@model MovieShopUser.Models.GenreMovieViewModel
+@model MovieShopUser.Models.GenreMovieRateViewModel
 
 @{
     ViewBag.Title = "MovieShop";
@@ -22,7 +22,7 @@
                                 <li><a href="@Url.Action("Filtert", "Shop", new {id = genre.Id})">@genre.Name</a></li>
                             }
                         </ul>
-                    </li>
+                    </li>                    
                 </ul>
             </div>
         </div>

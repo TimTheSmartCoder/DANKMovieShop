@@ -42,6 +42,7 @@ namespace MovieShopAPI.Controllers
         // PUT: api/Orders/5
         [ResponseType(typeof(void))]
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult PutOrder(int id, Order order)
         {
             if (!ModelState.IsValid)
@@ -62,6 +63,7 @@ namespace MovieShopAPI.Controllers
         // POST: api/Orders
         [ResponseType(typeof(Order))]
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult PostOrder(Order order)
         {
             if (!ModelState.IsValid)
@@ -77,6 +79,7 @@ namespace MovieShopAPI.Controllers
         // DELETE: api/Orders/5
         [ResponseType(typeof(Order))]
         [HttpDelete]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult DeleteOrder(int id)
         {
             Order order = _manager.ReadOne(id);

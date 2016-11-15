@@ -16,7 +16,7 @@ namespace MovieShopBackend.Contexts
         {
             IList<Genre> genres = new List<Genre>();
             IList<Movie> movies =new List<Movie>();
-
+            
             genres.Add(new Genre
             {
                 Name = "Action"

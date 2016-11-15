@@ -29,7 +29,7 @@ namespace ServiceGateway.ServiceGateways
             authentication?.Login(this.Client);
         }
 
-        public T Create(T entity)
+        public virtual T Create(T entity)
         {
             HttpResponseMessage response = this.Client.PostAsJsonAsync(GetRestApiUri().AbsolutePath, entity).Result;
 
@@ -40,7 +40,7 @@ namespace ServiceGateway.ServiceGateways
                 $"Failed to create {entity.GetType().Name} with {GetRestApiUri().AbsoluteUri}");
         }
 
-        public List<T> ReadAll()
+        public virtual List<T> ReadAll()
         {
             HttpResponseMessage response = this.Client.GetAsync(GetRestApiUri().AbsolutePath).Result;
 
@@ -51,7 +51,7 @@ namespace ServiceGateway.ServiceGateways
                 $"Failed to get all the entites of {typeof(T).Name} with {GetRestApiUri().AbsoluteUri}");
         }
 
-        public T ReadOne(int id)
+        public virtual T ReadOne(int id)
         {
             HttpResponseMessage response = this.Client.GetAsync($"{GetRestApiUri().AbsolutePath}/{id}").Result;
 
@@ -62,10 +62,10 @@ namespace ServiceGateway.ServiceGateways
                 $"Failed to get the entity {typeof(T).Name} with {GetRestApiUri().AbsoluteUri}");
         }
 
-        public T Update(T entity)
+        public virtual T Update(T entity)
         {
             HttpResponseMessage response =
-                this.Client.PostAsJsonAsync($"{GetRestApiUri().AbsolutePath}/{entity.Id}", entity).Result;
+                this.Client.PutAsJsonAsync($"{GetRestApiUri().AbsolutePath}/{entity.Id}", entity).Result;
 
             if (response.IsSuccessStatusCode)
                 return response.Content.ReadAsAsync<T>().Result;
@@ -74,7 +74,7 @@ namespace ServiceGateway.ServiceGateways
                 $"Failed to update the entity {typeof(T).Name} with {GetRestApiUri().AbsoluteUri}");
         }
 
-        public bool Delete(int id)
+        public virtual bool Delete(int id)
         {
             HttpResponseMessage response = this.Client.DeleteAsync($"{GetRestApiUri().AbsolutePath}/{id}").Result;
 

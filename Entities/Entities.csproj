@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="AbstractEntity.cs" />
     <Compile Include="Address.cs" />
+    <Compile Include="CurrencyRate.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="Genre.cs" />
     <Compile Include="Movie.cs" />

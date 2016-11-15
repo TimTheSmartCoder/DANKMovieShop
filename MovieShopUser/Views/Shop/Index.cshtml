@@ -22,7 +22,8 @@
                                 <li><a href="@Url.Action("Filtert", "Shop", new {id = genre.Id})">@genre.Name</a></li>
                             }
                         </ul>
-                    </li>                    
+                    </li>
+                    <li><a href="@Url.Action("Currency", "Shop", new { currency = "EU", returnUrl = HttpContext.Current.Request.Url.AbsoluteUri})">change</a></li>                  
                 </ul>
             </div>
         </div>

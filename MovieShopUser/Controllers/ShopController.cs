@@ -15,16 +15,23 @@ namespace MovieShopUser.Controllers
         private IServiceGateway<Movie> _movieManager = ServiceGatewayFactory.GetService<Movie>();
         private IServiceGateway<Genre> _GenreManager = ServiceGatewayFactory.GetService<Genre>();
         private ICurrencyRateServiceGateway _currencyRateManager = ServiceGatewayFactory.GetService<CurrencyRate, ICurrencyRateServiceGateway>();
+        private CurrencyManager _currencyManager;
 
         private List<Movie> movies = new List<Movie>();
         private List<Genre> genres = new List<Genre>();
         private CurrencyRate currencyRate = new CurrencyRate();
 
         public ShopController()
-        {           
+        {      
+            this._currencyManager = new CurrencyManager(System.Web.HttpContext.Current, _currencyRateManager);
+                 
             movies = _movieManager.ReadAll();
             genres = _GenreManager.ReadAll();
-            currencyRate = _currencyRateManager.GetCurrencyRate("DKK");            
+            currencyRate = _currencyRateManager.GetCurrencyRate("DKK");
+
+            //Convert price to the correct currency.
+            foreach (Movie movie in movies)
+                movie.Price = this._currencyManager.Convert(movie.Price);    
         }
 
         
@@ -63,14 +70,27 @@ namespace MovieShopUser.Controllers
                 GenreMovieRateViewModel viewModel = new GenreMovieRateViewModel
                 {
                     Genres = _GenreManager.ReadAll(),
-                    Movies = _movieManager.ReadAll().FindAll(x => x.GenreId == genre.Id),
-                    SelectedGenre = genre,
+                    Movies = movies.FindAll(x => x.GenreId == genre.Id),
+                    SelectedGenre = new Genre
+                    {
+                        Id = -1,
+                        Name = "All"
+                    },
                     CurrencyRate = currencyRate,                   
                 };
                 return View("Index", viewModel);
             
         }
-        
+
+        [HttpGet]
+        public ActionResult Currency(string currency, string returnUrl)
+        {
+            if (currency != null)
+                this._currencyManager.SetCurrency(currency);
+            
+            return Redirect(returnUrl);
+        }
+
         [HttpGet]
         public ActionResult Details(int id)
         {

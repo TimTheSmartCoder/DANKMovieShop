@@ -48,7 +48,9 @@ namespace MovieShopUser.Controllers
                     Id = -1,
                     Name = "All"
                 },
-                CurrencyRate = currencyRate,              
+                CurrencyRate = currencyRate,
+                CurrencyName = _currencyManager.GetSelectedCurrency()
+
             };
 
             return View(viewModel);
@@ -71,12 +73,9 @@ namespace MovieShopUser.Controllers
                 {
                     Genres = _GenreManager.ReadAll(),
                     Movies = movies.FindAll(x => x.GenreId == genre.Id),
-                    SelectedGenre = new Genre
-                    {
-                        Id = -1,
-                        Name = "All"
-                    },
-                    CurrencyRate = currencyRate,                   
+                    SelectedGenre = genre,
+                    CurrencyRate = currencyRate,
+                    CurrencyName = _currencyManager.GetSelectedCurrency() 
                 };
                 return View("Index", viewModel);
             

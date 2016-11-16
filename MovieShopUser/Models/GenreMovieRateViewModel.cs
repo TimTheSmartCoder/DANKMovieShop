@@ -13,7 +13,7 @@ namespace MovieShopUser.Models
         public Movie Movie { get; set; }
         public Genre SelectedGenre { get; set; }
         public CurrencyRate CurrencyRate { get; set; }
-        public Rate Rate { get; set; }
+        public string CurrencyName { get; set; }        
     }
 
     

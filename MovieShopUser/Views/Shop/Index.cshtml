@@ -22,8 +22,19 @@
                                 <li><a href="@Url.Action("Filtert", "Shop", new {id = genre.Id})">@genre.Name</a></li>
                             }
                         </ul>
-                    </li>
-                    <li><a href="@Url.Action("Currency", "Shop", new { currency = "EU", returnUrl = HttpContext.Current.Request.Url.AbsoluteUri})">change</a></li>                  
+                    </li>                                      
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: black; text-decoration: none">Currency: @Model.CurrencyName <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("Currency", "Shop", new { currency = "DKK", returnUrl = HttpContext.Current.Request.Url.AbsoluteUri})">DKK</a></li>
+                            @foreach (Rate rate in Model.CurrencyRate.Rates)
+                            {
+                                <li><a href="@Url.Action("Currency", "Shop", new { currency = rate.Name, returnUrl = HttpContext.Current.Request.Url.AbsoluteUri})">@rate.Name</a></li>
+                            }
+                        </ul>
+                    </li>                   
                 </ul>
             </div>
         </div>
@@ -42,7 +53,7 @@
                                 </div>
                                 <hr />
                                 <p class="tagline card-text text-xs-center" style="color: black;">
-                                    Genre: @movie.Genre.Name<br />Year @movie.Year <br />Price @movie.Price
+                                    Genre: @movie.Genre.Name<br />Year @movie.Year <br />Price: @movie.Price @Model.CurrencyName
                                 </p>
                                 <a href="@movie.Trailer" class="btn btn-primary btn-block"><i class="fa fa-eye"></i> Watch Trailer</a>
                                 <a href="@Url.Action("Add", "Cart", new {prevUrl = "/Shop", id = movie.Id})" class="btn btn-primary btn-block"><i class="fa fa-eye"></i> Add to Cart</a>
